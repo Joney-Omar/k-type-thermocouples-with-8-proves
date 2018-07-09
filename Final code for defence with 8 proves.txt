@@ -1,0 +1,140 @@
+//Joney, Md. Omar Faruq
+//8 tem only total and average with lcd
+
+#include "max6675.h"
+#include<Wire.h>
+#include<LiquidCrystal_I2C.h>
+LiquidCrystal_I2C lcd(0x27,20,4);
+
+int ktcS01 = 2;
+int ktcCS1 = 3;
+int ktcCLK1 = 4;
+MAX6675 ktcl(ktcCLK1, ktcCS1, ktcS01);
+
+int ktcS02 = 5;
+int ktcCS2 = 6;
+int ktcCLK2 = 7;
+MAX6675 ktc2(ktcCLK2, ktcCS2, ktcS02);
+
+int ktcS03 = 8;
+int ktcCS3 = 9;
+int ktcCLK3 = 10;
+MAX6675 ktc3(ktcCLK3, ktcCS3, ktcS03);
+
+int ktcS04 = 11;
+int ktcCS4 = 12;
+int ktcCLK4 = 13;
+MAX6675 ktc4(ktcCLK4, ktcCS4, ktcS04);
+
+int ktcS05 = 22;
+int ktcCS5 = 23;
+int ktcCLK5 = 24;
+MAX6675 ktc5(ktcCLK5, ktcCS5, ktcS05);
+
+int ktcS06 = 25;
+int ktcCS6 = 26;
+int ktcCLK6 = 27;
+MAX6675 ktc6(ktcCLK6, ktcCS6, ktcS06);
+
+int ktcS07 = 28;
+int ktcCS7 = 29;
+int ktcCLK7 = 30;
+MAX6675 ktc7(ktcCLK7, ktcCS7, ktcS07);
+
+int ktcS08 = 31;
+int ktcCS8 = 32;
+int ktcCLK8 = 33;
+MAX6675 ktc8(ktcCLK8, ktcCS8, ktcS08);
+
+
+
+int Tot = 0;
+int Ave = 0;
+
+void setup(){
+Serial.begin(9600);
+lcd.begin();
+lcd.backlight();
+
+
+
+
+lcd.setCursor(0,0);
+lcd.print("Group# 69");
+lcd.setCursor(0,1);
+lcd.print("Final Output");
+lcd.setCursor(0,2);
+lcd.print("Tot=        Deg Cel");
+lcd.setCursor(0,3);
+lcd.print("Ave=        Deg Cel");
+
+}
+
+void loop() {
+//put the main code here, to run repeatedly:
+//basic readout test
+
+Serial.print("T1 = ");
+Serial.print(ktcl.readCelsius());
+Serial.print("  ");
+
+
+Serial.print("T2 = ");
+Serial.print(ktc2.readCelsius());
+Serial.print("  ");
+
+
+Serial.print("T3 = ");
+Serial.print(ktc3.readCelsius());
+Serial.print("  ");
+
+
+Serial.print("T4 = ");
+Serial.print(ktc4.readCelsius());
+Serial.print("  ");
+
+Serial.print("T5 = ");
+Serial.print(ktc5.readCelsius());
+Serial.print("  ");
+
+
+Serial.print("T6 = ");
+Serial.print(ktc6.readCelsius());
+Serial.print("  ");
+
+
+Serial.print("T7 = ");
+Serial.print(ktc7.readCelsius());
+Serial.print("  ");
+
+
+Serial.print("T8 = ");
+Serial.print(ktc8.readCelsius());
+Serial.println("  ");
+
+
+Serial.print("Group# 69");
+Serial.print("  ");
+lcd.setCursor(5,0);
+Serial.println();
+
+Serial.print("Final Output");
+Serial.print("  ");
+lcd.setCursor(5,1);
+Serial.println();
+
+
+Serial.print("Tot = ");
+Serial.print(ktcl.readCelsius()+ktc2.readCelsius()+ktc3.readCelsius()+ktc4.readCelsius()+ktc5.readCelsius()+ktc6.readCelsius()+ktc7.readCelsius()+ktc8.readCelsius());
+Serial.print("  ");
+lcd.setCursor(5,2);
+lcd.print(ktcl.readCelsius()+ktc2.readCelsius()+ktc3.readCelsius()+ktc4.readCelsius()+ktc5.readCelsius()+ktc6.readCelsius()+ktc7.readCelsius()+ktc8.readCelsius());
+
+Serial.print("Ave = ");
+Serial.print((ktcl.readCelsius()+ktc2.readCelsius()+ktc3.readCelsius()+ktc4.readCelsius()+ktc5.readCelsius()+ktc6.readCelsius()+ktc7.readCelsius()+ktc8.readCelsius())/8);
+Serial.print("  ");
+lcd.setCursor(5,3);
+lcd.print((ktcl.readCelsius()+ktc2.readCelsius()+ktc3.readCelsius()+ktc4.readCelsius()+ktc5.readCelsius()+ktc6.readCelsius()+ktc7.readCelsius()+ktc8.readCelsius())/8);
+Serial.println();
+delay(1000);
+}
